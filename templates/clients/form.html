@@ -1,0 +1,16 @@
+
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ 'Modifier' if form.name.data else 'Nouveau' }} client</h2>
+<form method="POST">
+  {{ form.hidden_tag() }}
+  <div>
+    {{ form.name.label }}<br>
+    {{ form.name(size=40) }}<br>
+    {% for err in form.name.errors %}
+      <span style="color:red">{{ err }}</span>
+    {% endfor %}
+  </div>
+  {{ form.submit() }}
+</form>
+{% endblock %}

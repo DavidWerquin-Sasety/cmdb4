@@ -1,0 +1,10 @@
+
+import os
+
+class Config:
+    SECRET_KEY = os.environ.get("SECRET_KEY", "dev")
+    SQLALCHEMY_DATABASE_URI = os.environ.get(
+        "DATABASE_URL",
+        "mysql+pymysql://root:password@localhost/sasety_cmdb4"
+    )
+    SQLALCHEMY_TRACK_MODIFICATIONS = False

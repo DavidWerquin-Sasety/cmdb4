@@ -1,0 +1,29 @@
+
+{% extends "base.html" %}
+{% block content %}
+<h2>Clients</h2>
+<a class="btn" href="{{ url_for('core.create_client') }}">Nouveau client</a>
+<table id="client-table" class="display">
+  <thead>
+    <tr><th>Nom</th><th>Actions</th></tr>
+  </thead>
+  <tbody>
+    {% for client in clients %}
+      <tr>
+        <td>{{ client.name }}</td>
+        <td>
+          <a href="{{ url_for('core.list_sites', client_id=client.id) }}">Sites</a>
+          <!-- placeholder for edit/delete -->
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+  $('#client-table').DataTable();
+</script>
+{% endblock %}

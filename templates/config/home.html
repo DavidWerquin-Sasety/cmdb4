@@ -1,0 +1,10 @@
+
+{% extends "base.html" %}
+{% block content %}
+<h2>Configuration pour {{ client.name }}</h2>
+<ul>
+  {% for key, tpl in config_entities.items() %}
+    <li><a href="{{ url_for('config.list_entities', client_id=client.id, entity_key=key) }}">{{ tpl[2] }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}
