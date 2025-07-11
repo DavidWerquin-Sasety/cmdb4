@@ -4,7 +4,7 @@
   <td>{{ eq.serial_number or "-" }}</td>
   <td>{{ eq.start_date or "-" }}</td>
   <td>
-    <a hx-get="{{ url_for('site_manage.edit_equipment', client_id=eq.site.client_id, site_id=eq.site.id, eqid=eq.id) }}" hx-target="closest tr" hx-swap="outerHTML">Éditer</a>
+    <a hx-get="{{ url_for('site_manage.edit_equipment', client_id=eq.site.client_id, site_id=eq.site.id, eqid=eq.id) }}" hx-target="closest tr" hx-swap="outerHTML" class="btn" style="background:#28a745;color:white;padding:2px 6px;border-radius:3px;text-decoration:none">Éditer</a>
     <form method="post" action="{{ url_for('site_manage.delete_equipment', client_id=eq.site.client_id, site_id=eq.site.id, eqid=eq.id) }}" style="display:inline">
       <button type="submit" onclick="return confirm('Supprimer ?');">Supprimer</button>
     </form>

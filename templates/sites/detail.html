@@ -5,9 +5,9 @@
 
 <h3>Accès Internet</h3>
 {% if site.accesses|length < 3 %}
-<button hx-get="{{ url_for('site_manage.create_access', client_id=client.id, site_id=site.id) }}" hx-target="#access-table tbody" hx-swap="beforeend">Ajouter</button>
+<a class="btn" hx-get="{{ url_for('site_manage.create_access', client_id=client.id, site_id=site.id) }}" hx-target="#access-table tbody" hx-swap="beforeend">Ajouter</a>
 {% endif %}
-<table id="access-table" class="display">
+<table id="access-table">
   <thead><tr><th>Type</th><th>Contrat</th><th>Début</th><th>Actions</th></tr></thead>
   <tbody>
     {% for acc in site.accesses %}
@@ -18,9 +18,9 @@
 
 <h3>Licence SASE</h3>
 {% if not site.licenses %}
-<button hx-get="{{ url_for('site_manage.create_license', client_id=client.id, site_id=site.id) }}" hx-target="#lic-table tbody" hx-swap="beforeend">Ajouter</button>
+<a class="btn" hx-get="{{ url_for('site_manage.create_license', client_id=client.id, site_id=site.id) }}" hx-target="#lic-table tbody" hx-swap="beforeend">Ajouter</a>
 {% endif %}
-<table id="lic-table" class="display">
+<table id="lic-table">
   <thead><tr><th>Type</th><th>Début</th><th>Actions</th></tr></thead>
   <tbody>
     {% for lic in site.licenses %}
@@ -31,9 +31,9 @@
 
 <h3>Équipements SASE</h3>
 {% if site.equipments|length < 2 %}
-<button hx-get="{{ url_for('site_manage.create_equipment', client_id=client.id, site_id=site.id) }}" hx-target="#eq-table tbody" hx-swap="beforeend">Ajouter</button>
+<a class="btn" hx-get="{{ url_for('site_manage.create_equipment', client_id=client.id, site_id=site.id) }}" hx-target="#eq-table tbody" hx-swap="beforeend">Ajouter</a>
 {% endif %}
-<table id="eq-table" class="display">
+<table id="eq-table">
   <thead><tr><th>Type</th><th>S/N</th><th>Début</th><th>Actions</th></tr></thead>
   <tbody>
     {% for eq in site.equipments %}
@@ -41,10 +41,4 @@
     {% endfor %}
   </tbody>
 </table>
-{% endblock %}
-{% block scripts %}
-{{ super() }}
-<script>
-$('#access-table, #lic-table, #eq-table').DataTable({info:false,lengthChange:false});
-</script>
 {% endblock %}

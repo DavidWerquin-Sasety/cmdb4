@@ -4,5 +4,5 @@
   {% for f in form if f.name not in ('csrf_token','submit') %}
     {{ f.label }} {{ f() }}<br>
   {% endfor %}
-  {{ form.submit() }}
+  <button class="btn" type="submit">Enregistrer</button>
 </form>
