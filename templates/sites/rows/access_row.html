@@ -4,8 +4,8 @@
   <td>{{ acc.contract_number or "-" }}</td>
   <td>{{ acc.start_date or "-" }}</td>
   <td>
-    <a hx-get="{{ url_for('site_manage.edit_access', client_id=acc.site.client_id, site_id=acc.site.id, aid=acc.id) }}" hx-target="closest tr" hx-swap="outerHTML" class="btn" style="background:#28a745;color:white;padding:2px 6px;border-radius:3px;text-decoration:none">Éditer</a>
-    <form method="post" action="{{ url_for('site_manage.delete_access', client_id=acc.site.client_id, site_id=acc.site.id, aid=acc.id) }}" style="display:inline">
+    <a class="btn" hx-get="{{ url_for('site_manage.edit_access', client_id=acc.site.client_id, site_id=acc.site.id, access_id=acc.id) }}" hx-target="closest tr" hx-swap="outerHTML">Éditer</a>
+    <form method="post" action="{{ url_for('site_manage.delete_access', client_id=acc.site.client_id, site_id=acc.site.id, access_id=acc.id) }}" style="display:inline">
       <button type="submit" onclick="return confirm('Supprimer ?');">Supprimer</button>
     </form>
   </td>

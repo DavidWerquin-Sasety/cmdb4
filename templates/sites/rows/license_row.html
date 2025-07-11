@@ -3,8 +3,8 @@
   <td>{{ lic.type.label if lic.type else "-" }}</td>
   <td>{{ lic.start_date or "-" }}</td>
   <td>
-    <a hx-get="{{ url_for('site_manage.edit_license', client_id=lic.site.client_id, site_id=lic.site.id, lid=lic.id) }}" hx-target="closest tr" hx-swap="outerHTML" class="btn" style="background:#28a745;color:white;padding:2px 6px;border-radius:3px;text-decoration:none">Éditer</a>
-    <form method="post" action="{{ url_for('site_manage.delete_license', client_id=lic.site.client_id, site_id=lic.site.id, lid=lic.id) }}" style="display:inline">
+    <a class="btn" hx-get="{{ url_for('site_manage.edit_license', client_id=lic.site.client_id, site_id=lic.site.id, license_id=lic.id) }}" hx-target="closest tr" hx-swap="outerHTML">Éditer</a>
+    <form method="post" action="{{ url_for('site_manage.delete_license', client_id=lic.site.client_id, site_id=lic.site.id, license_id=lic.id) }}" style="display:inline">
       <button type="submit" onclick="return confirm('Supprimer ?');">Supprimer</button>
     </form>
   </td>

@@ -5,40 +5,40 @@
 
 <h3>Accès Internet</h3>
 {% if site.accesses|length < 3 %}
-<a class="btn" hx-get="{{ url_for('site_manage.create_access', client_id=client.id, site_id=site.id) }}" hx-target="#access-table tbody" hx-swap="beforeend">Ajouter</a>
+<a class="btn" hx-get="{{ url_for('site_manage.create_access', client_id=client.id, site_id=site.id) }}" hx-target="#access-body" hx-swap="beforeend">Ajouter</a>
 {% endif %}
-<table id="access-table">
-  <thead><tr><th>Type</th><th>Contrat</th><th>Début</th><th>Actions</th></tr></thead>
-  <tbody>
-    {% for acc in site.accesses %}
-      {% include "sites/rows/access_row.html" with context %}
-    {% endfor %}
-  </tbody>
+<table>
+<thead><tr><th>Type</th><th>Contrat</th><th>Début</th><th>Actions</th></tr></thead>
+<tbody id="access-body">
+  {% for acc in site.accesses %}
+    {% include "sites/rows/access_row.html" with context %}
+  {% endfor %}
+</tbody>
 </table>
 
 <h3>Licence SASE</h3>
 {% if not site.licenses %}
-<a class="btn" hx-get="{{ url_for('site_manage.create_license', client_id=client.id, site_id=site.id) }}" hx-target="#lic-table tbody" hx-swap="beforeend">Ajouter</a>
+<a class="btn" hx-get="{{ url_for('site_manage.create_license', client_id=client.id, site_id=site.id) }}" hx-target="#lic-body" hx-swap="beforeend">Ajouter</a>
 {% endif %}
-<table id="lic-table">
-  <thead><tr><th>Type</th><th>Début</th><th>Actions</th></tr></thead>
-  <tbody>
-    {% for lic in site.licenses %}
-      {% include "sites/rows/license_row.html" with context %}
-    {% endfor %}
-  </tbody>
+<table>
+<thead><tr><th>Type</th><th>Début</th><th>Actions</th></tr></thead>
+<tbody id="lic-body">
+  {% for lic in site.licenses %}
+    {% include "sites/rows/license_row.html" with context %}
+  {% endfor %}
+</tbody>
 </table>
 
 <h3>Équipements SASE</h3>
 {% if site.equipments|length < 2 %}
-<a class="btn" hx-get="{{ url_for('site_manage.create_equipment', client_id=client.id, site_id=site.id) }}" hx-target="#eq-table tbody" hx-swap="beforeend">Ajouter</a>
+<a class="btn" hx-get="{{ url_for('site_manage.create_equipment', client_id=client.id, site_id=site.id) }}" hx-target="#eq-body" hx-swap="beforeend">Ajouter</a>
 {% endif %}
-<table id="eq-table">
-  <thead><tr><th>Type</th><th>S/N</th><th>Début</th><th>Actions</th></tr></thead>
-  <tbody>
-    {% for eq in site.equipments %}
-      {% include "sites/rows/equipment_row.html" with context %}
-    {% endfor %}
-  </tbody>
+<table>
+<thead><tr><th>Type</th><th>S/N</th><th>Début</th><th>Actions</th></tr></thead>
+<tbody id="eq-body">
+  {% for eq in site.equipments %}
+    {% include "sites/rows/equipment_row.html" with context %}
+  {% endfor %}
+</tbody>
 </table>
 {% endblock %}
