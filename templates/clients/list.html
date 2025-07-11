@@ -3,12 +3,18 @@
 {% block content %}
 <h2>Clients</h2>
 <a class="btn" href="{{ url_for('core.create_client') }}">Nouveau client</a>
-<table>
-<thead><tr><th>Nom</th><th>Actions</th></tr></thead>
+
+<input type="text" id="searchClient" placeholder="Rechercher..." style="margin-top:10px;padding:4px;width:200px">
+
+<table id="clientsTable" style="margin-top:10px">
+<thead>
+  <tr><th>Nom</th><th>Nb. de sites</th><th>Actions</th></tr>
+</thead>
 <tbody>
 {% for cl in clients %}
 <tr>
   <td>{{ cl.name }}</td>
+  <td>{{ cl.sites|length }}</td>
   <td>
     <a class="btn" href="{{ url_for('core.list_sites', client_id=cl.id) }}">Sites</a>
     <a class="btn" href="{{ url_for('config.config_home', client_id=cl.id) }}">Config</a>
@@ -19,4 +25,14 @@
 {% endfor %}
 </tbody>
 </table>
+
+<script>
+const searchInput=document.getElementById('searchClient');
+searchInput.addEventListener('keyup',()=>{
+  const val=searchInput.value.toUpperCase();
+  document.querySelectorAll('#clientsTable tbody tr').forEach(row=>{
+    row.style.display=row.textContent.toUpperCase().includes(val)?'':'none';
+  });
+});
+</script>
 {% endblock %}
