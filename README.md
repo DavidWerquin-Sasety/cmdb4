@@ -1,6 +1,7 @@
 
-# SASETY CMDB v3
+# SASETY CMDB v4
 
-> Correctifs : formulaires client & site opérationnels + listes en DataTables.
+- **CRUD complet** des accès internet, licences SASE et équipements : création, édition, suppression directement depuis la page du site.  
+- **Champs facultatifs** : seules les colonnes nom / libellé restent obligatoires, le reste est optionnel.
 
-(Le reste des instructions reste identique à la v2.)
+Relance le serveur après migration si besoin, tout est prêt ! 

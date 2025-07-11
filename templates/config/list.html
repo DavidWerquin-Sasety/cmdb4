@@ -19,7 +19,7 @@
     {% for item in items %}
       <tr>
         {% for col in item.__table__.columns %}
-          <td>{{ item|attr(col.name) }}</td>
+          <td>{{ getattr(item, col.name) }}</td>
         {% endfor %}
         <td>
           <a href="{{ url_for('config.edit_entity', client_id=client.id, entity_key=entity_key, item_id=item.id) }}">Éditer</a>

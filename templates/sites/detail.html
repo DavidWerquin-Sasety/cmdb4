@@ -4,10 +4,10 @@
 <h2>Site {{ site.name }} ({{ site.code }})</h2>
 
 <h3>Accès Internet</h3>
-<a href="{{ url_for('site_manage.create_access', client_id=client.id, site_id=site.id) }}">Ajouter</a>
+<a href="{{ url_for('site_manage.create_access', client_id=client.id, site_id=site.id) }}" class="btn">Ajouter</a>
 <table id="access-table" class="display">
   <thead>
-    <tr><th>Type</th><th>Contrat</th><th>Début</th></tr>
+    <tr><th>Type</th><th>Contrat</th><th>Début</th><th>Actions</th></tr>
   </thead>
   <tbody>
     {% for acc in site.accesses %}
@@ -15,35 +15,53 @@
         <td>{{ acc.type.label if acc.type else "" }}</td>
         <td>{{ acc.contract_number }}</td>
         <td>{{ acc.start_date }}</td>
+        <td>
+          <a href="{{ url_for('site_manage.edit_access', client_id=client.id, site_id=site.id, access_id=acc.id) }}">Éditer</a>
+          <form action="{{ url_for('site_manage.delete_access', client_id=client.id, site_id=site.id, access_id=acc.id) }}" method="post" style="display:inline">
+            <button type="submit" onclick="return confirm('Supprimer ?');">Supprimer</button>
+          </form>
+        </td>
       </tr>
     {% endfor %}
   </tbody>
 </table>
 
 <h3>Licences SASE</h3>
-<a href="{{ url_for('site_manage.create_license', client_id=client.id, site_id=site.id) }}">Ajouter</a>
+<a href="{{ url_for('site_manage.create_license', client_id=client.id, site_id=site.id) }}" class="btn">Ajouter</a>
 <table id="lic-table" class="display">
-  <thead><tr><th>Type</th><th>Début</th></tr></thead>
+  <thead><tr><th>Type</th><th>Début</th><th>Actions</th></tr></thead>
   <tbody>
     {% for lic in site.licenses %}
       <tr>
         <td>{{ lic.type.label if lic.type else "" }}</td>
         <td>{{ lic.start_date }}</td>
+        <td>
+          <a href="{{ url_for('site_manage.edit_license', client_id=client.id, site_id=site.id, lic_id=lic.id) }}">Éditer</a>
+          <form action="{{ url_for('site_manage.delete_license', client_id=client.id, site_id=site.id, lic_id=lic.id) }}" method="post" style="display:inline">
+            <button type="submit" onclick="return confirm('Supprimer ?');">Supprimer</button>
+          </form>
+        </td>
       </tr>
     {% endfor %}
   </tbody>
 </table>
 
 <h3>Équipements SASE</h3>
-<a href="{{ url_for('site_manage.create_equipment', client_id=client.id, site_id=site.id) }}">Ajouter</a>
+<a href="{{ url_for('site_manage.create_equipment', client_id=client.id, site_id=site.id) }}" class="btn">Ajouter</a>
 <table id="eq-table" class="display">
-  <thead><tr><th>Type</th><th>Numéro de série</th><th>Début</th></tr></thead>
+  <thead><tr><th>Type</th><th>Numéro de série</th><th>Début</th><th>Actions</th></tr></thead>
   <tbody>
     {% for eq in site.equipments %}
       <tr>
         <td>{{ eq.type.label if eq.type else "" }}</td>
         <td>{{ eq.serial_number }}</td>
         <td>{{ eq.start_date }}</td>
+        <td>
+          <a href="{{ url_for('site_manage.edit_equipment', client_id=client.id, site_id=site.id, eq_id=eq.id) }}">Éditer</a>
+          <form action="{{ url_for('site_manage.delete_equipment', client_id=client.id, site_id=site.id, eq_id=eq.id) }}" method="post" style="display:inline">
+            <button type="submit" onclick="return confirm('Supprimer ?');">Supprimer</button>
+          </form>
+        </td>
       </tr>
     {% endfor %}
   </tbody>
