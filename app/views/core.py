@@ -63,3 +63,16 @@ def create_site(cid):
         flash("Site créé","success")
         return redirect(url_for('core.list_sites', cid=cid))
     return render_template("sites/form.html", form=form, client=client)
+
+
+@core_bp.route("/client/<int:cid>/site/<int:sid>/edit", methods=["GET","POST"])
+def edit_site(cid,sid):
+    client = Client.query.get_or_404(cid)
+    site = Site.query.get_or_404(sid)
+    form = SiteForm(obj=site)
+    if form.validate_on_submit():
+        form.populate_obj(site)
+        db.session.commit()
+        flash("Site mis à jour","success")
+        return redirect(url_for('core.list_sites', cid=cid))
+    return render_template("sites/form.html", form=form, client=client)
