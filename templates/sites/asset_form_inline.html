@@ -1,5 +1,5 @@
 
-<form method="POST">
+<form method="POST" hx-post="." hx-target="closest tr" hx-swap="outerHTML">
   {{ form.hidden_tag() }}
   {% for f in form if f.name not in ('csrf_token','submit') %}
     {{ f.label }} {{ f() }}<br>

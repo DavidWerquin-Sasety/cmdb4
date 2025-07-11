@@ -5,7 +5,7 @@ from ..extensions import db
 class InternetTechnology(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     client_id = db.Column(db.Integer, db.ForeignKey("client.id"), nullable=False)
-    label = db.Column(db.String(32), nullable=False)  # e.g., FTTH, FTTO, 4G ...
+    label = db.Column(db.String(32), nullable=False)
 
 class InternetAccessType(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -15,9 +15,11 @@ class InternetAccessType(db.Model):
     zone = db.Column(db.Integer)
     bandwidth_mbps = db.Column(db.Integer)
     quota_gb = db.Column(db.Integer)
-    fas_eur = db.Column(db.Float)  # frais activ service
+    fas_eur = db.Column(db.Float)
     monthly_cost_eur = db.Column(db.Float)
     commitment_months = db.Column(db.Integer)
+
+    technology = db.relationship("InternetTechnology")
 
 class InternetAccess(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,3 +28,5 @@ class InternetAccess(db.Model):
     contract_number = db.Column(db.String(64))
     start_date = db.Column(db.Date)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    type = db.relationship("InternetAccessType", lazy="joined")

@@ -1,9 +1,8 @@
 
 {% extends "base.html" %}
 {% block content %}
-<h2>{{ title }} - {{ client.name }}</h2>
+<h2>{{ title }} – {{ client.name }}</h2>
 <a class="btn" href="{{ url_for('config.create_entity', client_id=client.id, entity_key=entity_key) }}">Ajouter</a>
-
 <table id="data-table" class="display">
   <thead>
     <tr>
@@ -19,12 +18,12 @@
     {% for item in items %}
       <tr>
         {% for col in item.__table__.columns %}
-          <td>{{ getattr(item, col.name) }}</td>
+          <td>{{ item|attr(col.name) }}</td>
         {% endfor %}
         <td>
           <a href="{{ url_for('config.edit_entity', client_id=client.id, entity_key=entity_key, item_id=item.id) }}">Éditer</a>
-          <form action="{{ url_for('config.delete_entity', client_id=client.id, entity_key=entity_key, item_id=item.id) }}" method="post" style="display:inline">
-            <button type="submit" onclick="return confirm('Confirmer la suppression ?');">Supprimer</button>
+          <form method="post" action="{{ url_for('config.delete_entity', client_id=client.id, entity_key=entity_key, item_id=item.id) }}" style="display:inline">
+            <button type="submit" onclick="return confirm('Supprimer ?');">Supprimer</button>
           </form>
         </td>
       </tr>
@@ -32,12 +31,9 @@
   </tbody>
 </table>
 {% endblock %}
-
 {% block scripts %}
 {{ super() }}
 <script>
-  $(document).ready(function() {
-    $('#data-table').DataTable();
-  });
+$('#data-table').DataTable({info:false,lengthChange:false});
 </script>
 {% endblock %}
