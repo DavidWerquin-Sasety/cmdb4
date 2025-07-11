@@ -1,0 +1,19 @@
+
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ title }} – {{ site.name }}</h2>
+<form method="POST">
+  {{ form.hidden_tag() }}
+  {% for field in form if field.name not in ('csrf_token','submit') %}
+    <div>
+      {{ field.label }}<br>
+      {{ field() }}<br>
+      {% for err in field.errors %}
+        <span style="color:red">{{ err }}</span>
+      {% endfor %}
+    </div>
+  {% endfor %}
+  <button class="btn" type="submit">Enregistrer</button>
+  <a class="btn" href="{{ url_for('site_manage.site_detail', client_id=client.id, site_id=site.id) }}">Annuler</a>
+</form>
+{% endblock %}

@@ -5,40 +5,75 @@
 
 <h3>Accès Internet</h3>
 {% if site.accesses|length < 3 %}
-<a class="btn" hx-get="{{ url_for('site_manage.create_access', client_id=client.id, site_id=site.id) }}" hx-target="#access-body" hx-swap="beforeend">Ajouter</a>
+<a class="btn" href="{{ url_for('site_manage.create_access', client_id=client.id, site_id=site.id) }}">Ajouter un accès</a>
+{% else %}
+<span>Limite atteinte (3/3)</span>
 {% endif %}
 <table>
 <thead><tr><th>Type</th><th>Contrat</th><th>Début</th><th>Actions</th></tr></thead>
-<tbody id="access-body">
-  {% for acc in site.accesses %}
-    {% include "sites/rows/access_row.html" with context %}
-  {% endfor %}
+<tbody>
+{% for acc in site.accesses %}
+  <tr>
+    <td>{{ acc.type.label if acc.type else "-" }}</td>
+    <td>{{ acc.contract_number or "-" }}</td>
+    <td>{{ acc.start_date or "-" }}</td>
+    <td>
+      <a class="btn" href="{{ url_for('site_manage.edit_access', client_id=client.id, site_id=site.id, access_id=acc.id) }}">Éditer</a>
+      <form method="post" action="{{ url_for('site_manage.delete_access', client_id=client.id, site_id=site.id, access_id=acc.id) }}" style="display:inline">
+        <button type="submit" onclick="return confirm('Supprimer ?');">Supprimer</button>
+      </form>
+    </td>
+  </tr>
+{% endfor %}
 </tbody>
 </table>
 
 <h3>Licence SASE</h3>
 {% if not site.licenses %}
-<a class="btn" hx-get="{{ url_for('site_manage.create_license', client_id=client.id, site_id=site.id) }}" hx-target="#lic-body" hx-swap="beforeend">Ajouter</a>
+<a class="btn" href="{{ url_for('site_manage.create_license', client_id=client.id, site_id=site.id) }}">Ajouter une licence</a>
+{% else %}
+<span>Limite atteinte (1/1)</span>
 {% endif %}
 <table>
 <thead><tr><th>Type</th><th>Début</th><th>Actions</th></tr></thead>
-<tbody id="lic-body">
-  {% for lic in site.licenses %}
-    {% include "sites/rows/license_row.html" with context %}
-  {% endfor %}
+<tbody>
+{% for lic in site.licenses %}
+  <tr>
+    <td>{{ lic.type.label if lic.type else "-" }}</td>
+    <td>{{ lic.start_date or "-" }}</td>
+    <td>
+      <a class="btn" href="{{ url_for('site_manage.edit_license', client_id=client.id, site_id=site.id, license_id=lic.id) }}">Éditer</a>
+      <form method="post" action="{{ url_for('site_manage.delete_license', client_id=client.id, site_id=site.id, license_id=lic.id) }}" style="display:inline">
+        <button type="submit" onclick="return confirm('Supprimer ?');">Supprimer</button>
+      </form>
+    </td>
+  </tr>
+{% endfor %}
 </tbody>
 </table>
 
 <h3>Équipements SASE</h3>
 {% if site.equipments|length < 2 %}
-<a class="btn" hx-get="{{ url_for('site_manage.create_equipment', client_id=client.id, site_id=site.id) }}" hx-target="#eq-body" hx-swap="beforeend">Ajouter</a>
+<a class="btn" href="{{ url_for('site_manage.create_equipment', client_id=client.id, site_id=site.id) }}">Ajouter un équipement</a>
+{% else %}
+<span>Limite atteinte (2/2)</span>
 {% endif %}
 <table>
 <thead><tr><th>Type</th><th>S/N</th><th>Début</th><th>Actions</th></tr></thead>
-<tbody id="eq-body">
-  {% for eq in site.equipments %}
-    {% include "sites/rows/equipment_row.html" with context %}
-  {% endfor %}
+<tbody>
+{% for eq in site.equipments %}
+  <tr>
+    <td>{{ eq.type.label if eq.type else "-" }}</td>
+    <td>{{ eq.serial_number or "-" }}</td>
+    <td>{{ eq.start_date or "-" }}</td>
+    <td>
+      <a class="btn" href="{{ url_for('site_manage.edit_equipment', client_id=client.id, site_id=site.id, equipment_id=eq.id) }}">Éditer</a>
+      <form method="post" action="{{ url_for('site_manage.delete_equipment', client_id=client.id, site_id=site.id, equipment_id=eq.id) }}" style="display:inline">
+        <button type="submit" onclick="return confirm('Supprimer ?');">Supprimer</button>
+      </form>
+    </td>
+  </tr>
+{% endfor %}
 </tbody>
 </table>
 {% endblock %}
