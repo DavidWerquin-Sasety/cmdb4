@@ -4,19 +4,40 @@
 <a class="btn" href="{{ url_for('core.list_clients') }}">← Retour clients</a>
 <h2>Sites – {{ client.name }}</h2>
 <a class="btn" href="{{ url_for('core.create_site', client_id=client.id) }}">Nouveau site</a>
-<table>
-<thead><tr><th>Nom</th><th>Code</th><th>Actions</th></tr></thead>
+
+<input type="text" id="searchInput" placeholder="Rechercher..." style="margin-top:10px;padding:4px;width:200px">
+
+<table id="sitesTable" style="margin-top:10px">
+<thead><tr>
+  <th>Nom</th><th>Code</th><th>Type</th><th>Ville</th><th>Pays</th><th>Actions</th>
+</tr></thead>
 <tbody>
 {% for s in client.sites %}
 <tr>
   <td>{{ s.name }}</td>
   <td>{{ s.code }}</td>
+  <td>{{ s.site_type.label if s.site_type else "-" }}</td>
+  <td>{{ s.city }}</td>
+  <td>{{ s.country }}</td>
   <td>
     <a class="btn" href="{{ url_for('core.edit_site', client_id=client.id, site_id=s.id) }}">Éditer</a>
+    <a class="btn" href="{{ url_for('core.delete_site', client_id=client.id, site_id=s.id) }}">Supprimer</a>
     <a class="btn" href="{{ url_for('site_manage.site_detail', client_id=client.id, site_id=s.id) }}">Détail</a>
   </td>
 </tr>
 {% endfor %}
 </tbody>
 </table>
+
+<script>
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('keyup', function() {
+  const filter = this.value.toUpperCase();
+  const rows = document.querySelectorAll('#sitesTable tbody tr');
+  rows.forEach(row => {
+    const text = row.textContent.toUpperCase();
+    row.style.display = text.includes(filter) ? '' : 'none';
+  });
+});
+</script>
 {% endblock %}

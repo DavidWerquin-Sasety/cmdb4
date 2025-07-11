@@ -1,0 +1,11 @@
+
+{% extends "base.html" %}
+{% block content %}
+<h2>Supprimer le site {{ site.name }}</h2>
+<p>Cette opération supprimera toutes les données associées. Tapez <strong>{{ site.name.upper() }}</strong> pour confirmer.</p>
+<form method="POST">
+  <input type="text" name="confirm" size="40">
+  <button class="btn" type="submit">Confirmer</button>
+  <a class="btn" href="{{ url_for('core.list_sites', client_id=client_id) }}">Annuler</a>
+</form>
+{% endblock %}

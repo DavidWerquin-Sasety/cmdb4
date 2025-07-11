@@ -52,23 +52,21 @@ def list_sites(client_id):
     client = Client.query.get_or_404(client_id)
     return render_template("sites/list.html", client=client)
 
+
 @core_bp.route("/client/<int:client_id>/site/new", methods=["GET", "POST"])
 def create_site(client_id):
     client = Client.query.get_or_404(client_id)
     form = SiteForm()
-    # choices
     form.site_type_id.choices = [(t.id, t.label) for t in SiteType.query.filter_by(client_id=client.id)]
     if form.validate_on_submit():
-        site = Site(
-            client=client,
-            name=form.name.data,
-            code=form.code.data,
-            street=form.street.data,
-            postal_code=form.postal_code.data,
-            city=form.city.data,
-            country=form.country.data,
-            site_type_id=form.site_type_id.data
-        )
+        site = Site(client=client,
+                    name=form.name.data,
+                    code=form.code.data,
+                    street=form.street.data,
+                    postal_code=form.postal_code.data,
+                    city=form.city.data,
+                    country=form.country.data)
+        site.site_type_id = form.site_type_id.data
         db.session.add(site)
         db.session.commit()
         flash("Site créé", "success")
@@ -87,3 +85,16 @@ def edit_site(client_id, site_id):
         flash("Site mis à jour", "success")
         return redirect(url_for('core.list_sites', client_id=client.id))
     return render_template("sites/form.html", form=form, client=client)
+
+@core_bp.route("/client/<int:client_id>/site/<int:site_id>/delete", methods=["GET","POST"])
+def delete_site(client_id, site_id):
+    site = Site.query.get_or_404(site_id)
+    if request.method == "POST":
+        confirm = request.form.get("confirm")
+        if confirm == site.name.upper():
+            db.session.delete(site)
+            db.session.commit()
+            flash("Site supprimé","success")
+            return redirect(url_for('core.list_sites', client_id=client_id))
+        flash("Confirmation incorrecte","danger")
+    return render_template("sites/confirm_delete.html", site=site, client_id=client_id)
