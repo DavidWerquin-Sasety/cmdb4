@@ -6,8 +6,7 @@ class SaseEquipmentType(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     client_id = db.Column(db.Integer, db.ForeignKey("client.id"), nullable=False)
     label = db.Column(db.String(64), nullable=False)
-    high_availability = db.Column(db.Boolean, default=False)
-    model = db.Column(db.String(16))  # X1500, X1600, X1700
+    model = db.Column(db.String(16))          # X1500, X1600, X1700
     bandwidth_mbps = db.Column(db.Integer)
 
 class SaseEquipment(db.Model):

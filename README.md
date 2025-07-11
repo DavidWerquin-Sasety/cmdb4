@@ -1,7 +1,8 @@
 
-# SASETY CMDB v4
+# SASETY CMDB v6 (rebased sur v4)
 
-- **CRUD complet** des accès internet, licences SASE et équipements : création, édition, suppression directement depuis la page du site.  
-- **Champs facultatifs** : seules les colonnes nom / libellé restent obligatoires, le reste est optionnel.
-
-Relance le serveur après migration si besoin, tout est prêt ! 
+* Inline‑edit HTMX (Accès, Licence, Équipement)
+* Règles : 3 accès / 1 licence / 2 équipements (même modèle)
+* Champ haute‑dispo retiré
+* Clients éditables + suppression forte
+* Tables compactes (info/longueur masqués)

@@ -1,0 +1,11 @@
+
+{% extends "base.html" %}
+{% block content %}
+<h2>Supprimer {{ client.name }}</h2>
+<p>Taper <strong>{{ client.name.upper() }}</strong> pour confirmer la suppression définitive.</p>
+<form method="POST">
+  <input name="confirm" type="text" size="40">
+  <button class="btn" type="submit">Confirmer</button>
+  <a href="{{ url_for('core.list_clients') }}">Annuler</a>
+</form>
+{% endblock %}
