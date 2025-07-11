@@ -1,18 +1,18 @@
 
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from ..extensions import db
-from ..models.core import Client, Site
+from ..models.core import Client, Site, SiteType
 from ..forms.core_forms import ClientForm, SiteForm
 
 core_bp = Blueprint("core", __name__, template_folder="../templates")
 
-# ----- Client CRUD -----
+# ---------- Clients ----------
 @core_bp.route("/clients")
 def list_clients():
     clients = Client.query.all()
     return render_template("clients/list.html", clients=clients)
 
-@core_bp.route("/clients/new", methods=["GET","POST"])
+@core_bp.route("/clients/new", methods=["GET", "POST"])
 def create_client():
     form = ClientForm()
     if form.validate_on_submit():
@@ -22,57 +22,68 @@ def create_client():
         return redirect(url_for('core.list_clients'))
     return render_template("clients/form.html", form=form)
 
-@core_bp.route("/client/<int:cid>/edit", methods=["GET","POST"])
-def edit_client(cid):
-    client = Client.query.get_or_404(cid)
+@core_bp.route("/client/<int:client_id>/edit", methods=["GET", "POST"])
+def edit_client(client_id):
+    client = Client.query.get_or_404(client_id)
     form = ClientForm(obj=client)
     if form.validate_on_submit():
         client.name = form.name.data
         db.session.commit()
-        flash("Client mis à jour","success")
+        flash("Client mis à jour", "success")
         return redirect(url_for('core.list_clients'))
     return render_template("clients/form.html", form=form)
 
-@core_bp.route("/client/<int:cid>/delete", methods=["GET","POST"])
-def delete_client(cid):
-    client = Client.query.get_or_404(cid)
-    if request.method=="POST":
-        if request.form.get("confirm") == client.name.upper():
-            db.session.delete(client); db.session.commit()
-            flash("Client supprimé","success")
+@core_bp.route("/client/<int:client_id>/delete", methods=["GET", "POST"])
+def delete_client(client_id):
+    client = Client.query.get_or_404(client_id)
+    if request.method == "POST":
+        confirm = request.form.get("confirm")
+        if confirm == client.name.upper():
+            db.session.delete(client)
+            db.session.commit()
+            flash("Client supprimé", "success")
             return redirect(url_for('core.list_clients'))
-        flash("Texte de confirmation incorrect.","danger")
-        return redirect(url_for('core.delete_client', cid=cid))
+        flash("Texte de confirmation incorrect.", "danger")
     return render_template("clients/confirm_delete.html", client=client)
 
-# ----- Sites -----
-@core_bp.route("/client/<int:cid>/sites")
-def list_sites(cid):
-    client = Client.query.get_or_404(cid)
+# ---------- Sites ----------
+@core_bp.route("/client/<int:client_id>/sites")
+def list_sites(client_id):
+    client = Client.query.get_or_404(client_id)
     return render_template("sites/list.html", client=client)
 
-@core_bp.route("/client/<int:cid>/site/new", methods=["GET","POST"])
-def create_site(cid):
-    client = Client.query.get_or_404(cid)
+@core_bp.route("/client/<int:client_id>/site/new", methods=["GET", "POST"])
+def create_site(client_id):
+    client = Client.query.get_or_404(client_id)
     form = SiteForm()
+    # choices
+    form.site_type_id.choices = [(t.id, t.label) for t in SiteType.query.filter_by(client_id=client.id)]
     if form.validate_on_submit():
-        site = Site(client=client, name=form.name.data, code=form.code.data,
-                    street=form.street.data, postal_code=form.postal_code.data,
-                    city=form.city.data, country=form.country.data)
-        db.session.add(site); db.session.commit()
-        flash("Site créé","success")
-        return redirect(url_for('core.list_sites', cid=cid))
+        site = Site(
+            client=client,
+            name=form.name.data,
+            code=form.code.data,
+            street=form.street.data,
+            postal_code=form.postal_code.data,
+            city=form.city.data,
+            country=form.country.data,
+            site_type_id=form.site_type_id.data
+        )
+        db.session.add(site)
+        db.session.commit()
+        flash("Site créé", "success")
+        return redirect(url_for('core.list_sites', client_id=client.id))
     return render_template("sites/form.html", form=form, client=client)
 
-
-@core_bp.route("/client/<int:cid>/site/<int:sid>/edit", methods=["GET","POST"])
-def edit_site(cid,sid):
-    client = Client.query.get_or_404(cid)
-    site = Site.query.get_or_404(sid)
+@core_bp.route("/client/<int:client_id>/site/<int:site_id>/edit", methods=["GET", "POST"])
+def edit_site(client_id, site_id):
+    client = Client.query.get_or_404(client_id)
+    site = Site.query.get_or_404(site_id)
     form = SiteForm(obj=site)
+    form.site_type_id.choices = [(t.id, t.label) for t in SiteType.query.filter_by(client_id=client.id)]
     if form.validate_on_submit():
         form.populate_obj(site)
         db.session.commit()
-        flash("Site mis à jour","success")
-        return redirect(url_for('core.list_sites', cid=cid))
+        flash("Site mis à jour", "success")
+        return redirect(url_for('core.list_sites', client_id=client.id))
     return render_template("sites/form.html", form=form, client=client)

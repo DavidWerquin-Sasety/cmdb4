@@ -1,13 +1,12 @@
 
 {% extends "base.html" %}
 {% block content %}
+<a class="btn" href="{{ url_for('core.list_sites', client_id=client.id) }}">← Retour aux sites</a>
 <h2>{{ site.name }} ({{ site.code }})</h2>
 
 <h3>Accès Internet</h3>
 {% if site.accesses|length < 3 %}
 <a class="btn" href="{{ url_for('site_manage.create_access', client_id=client.id, site_id=site.id) }}">Ajouter un accès</a>
-{% else %}
-<span>Limite atteinte (3/3)</span>
 {% endif %}
 <table>
 <thead><tr><th>Type</th><th>Contrat</th><th>Début</th><th>Actions</th></tr></thead>
@@ -31,8 +30,6 @@
 <h3>Licence SASE</h3>
 {% if not site.licenses %}
 <a class="btn" href="{{ url_for('site_manage.create_license', client_id=client.id, site_id=site.id) }}">Ajouter une licence</a>
-{% else %}
-<span>Limite atteinte (1/1)</span>
 {% endif %}
 <table>
 <thead><tr><th>Type</th><th>Début</th><th>Actions</th></tr></thead>
@@ -55,8 +52,6 @@
 <h3>Équipements SASE</h3>
 {% if site.equipments|length < 2 %}
 <a class="btn" href="{{ url_for('site_manage.create_equipment', client_id=client.id, site_id=site.id) }}">Ajouter un équipement</a>
-{% else %}
-<span>Limite atteinte (2/2)</span>
 {% endif %}
 <table>
 <thead><tr><th>Type</th><th>S/N</th><th>Début</th><th>Actions</th></tr></thead>

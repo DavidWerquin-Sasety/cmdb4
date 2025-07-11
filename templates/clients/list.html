@@ -3,26 +3,18 @@
 {% block content %}
 <h2>Clients</h2>
 <a class="btn" href="{{ url_for('core.create_client') }}">Nouveau client</a>
-<table id="client-table" class="display">
-  <thead><tr><th>Nom</th><th>Actions</th></tr></thead>
-  <tbody>
-  {% for c in clients %}
-    <tr>
-      <td>{{ c.name }}</td>
-      <td>
-        <a href="{{ url_for('core.list_sites', cid=c.id) }}">Sites</a> |
-        <a href="{{ url_for('config.config_home', client_id=c.id) }}">Config</a> |
-        <a href="{{ url_for('core.edit_client', cid=c.id) }}">Éditer</a> |
-        <a href="{{ url_for('core.delete_client', cid=c.id) }}">Supprimer</a>
-      </td>
-    </tr>
-  {% endfor %}
-  </tbody>
+<table>
+<thead><tr><th>Nom</th><th>Actions</th></tr></thead>
+<tbody>
+{% for cl in clients %}
+<tr>
+  <td>{{ cl.name }}</td>
+  <td>
+    <a class="btn" href="{{ url_for('core.list_sites', client_id=cl.id) }}">Sites</a>
+    <a class="btn" href="{{ url_for('core.edit_client', client_id=cl.id) }}">Éditer</a>
+  </td>
+</tr>
+{% endfor %}
+</tbody>
 </table>
-{% endblock %}
-{% block scripts %}
-{{ super() }}
-<script>
-$('#client-table').DataTable({info:false,lengthChange:false});
-</script>
 {% endblock %}

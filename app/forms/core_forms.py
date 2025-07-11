@@ -1,6 +1,6 @@
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SelectField, SubmitField
 from wtforms.validators import DataRequired
 
 class ClientForm(FlaskForm):
@@ -9,9 +9,10 @@ class ClientForm(FlaskForm):
 
 class SiteForm(FlaskForm):
     name = StringField("Nom du site", validators=[DataRequired()])
-    code = StringField("Code site", validators=[DataRequired()])
+    code = StringField("Code", validators=[DataRequired()])
     street = StringField("Rue")
     postal_code = StringField("Code postal")
     city = StringField("Ville")
     country = StringField("Pays")
+    site_type_id = SelectField("Type de site", coerce=int, validators=[DataRequired()])
     submit = SubmitField("Enregistrer")

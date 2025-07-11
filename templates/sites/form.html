@@ -4,36 +4,18 @@
 <h2>{{ 'Modifier' if form.name.data else 'Nouveau' }} site pour {{ client.name }}</h2>
 <form method="POST">
   {{ form.hidden_tag() }}
-  <div>
-    {{ form.name.label }}<br>
-    {{ form.name(size=40) }}<br>
-    {% for err in form.name.errors %}
-      <span style="color:red">{{ err }}</span>
-    {% endfor %}
-  </div>
-  <div>
-    {{ form.code.label }}<br>
-    {{ form.code(size=20) }}<br>
-    {% for err in form.code.errors %}
-      <span style="color:red">{{ err }}</span>
-    {% endfor %}
-  </div>
-  <div>
-    {{ form.street.label }}<br>
-    {{ form.street(size=50) }}
-  </div>
-  <div>
-    {{ form.postal_code.label }}<br>
-    {{ form.postal_code(size=20) }}
-  </div>
-  <div>
-    {{ form.city.label }}<br>
-    {{ form.city(size=30) }}
-  </div>
-  <div>
-    {{ form.country.label }}<br>
-    {{ form.country(size=30) }}
-  </div>
-  {{ form.submit() }}
+  {% for field in form %}
+    {% if field.name not in ('csrf_token','submit') %}
+      <div>
+        {{ field.label }}<br>
+        {{ field() }}<br>
+        {% for err in field.errors %}
+          <span style="color:red">{{ err }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endfor %}
+  <button class="btn" type="submit">Enregistrer</button>
+  <a class="btn" href="{{ url_for('core.list_sites', client_id=client.id) }}">Retour aux sites</a>
 </form>
 {% endblock %}
