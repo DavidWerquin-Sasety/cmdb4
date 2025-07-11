@@ -11,7 +11,9 @@
   <td>{{ cl.name }}</td>
   <td>
     <a class="btn" href="{{ url_for('core.list_sites', client_id=cl.id) }}">Sites</a>
+    <a class="btn" href="{{ url_for('config.config_home', client_id=cl.id) }}">Config</a>
     <a class="btn" href="{{ url_for('core.edit_client', client_id=cl.id) }}">Éditer</a>
+    <a class="btn" href="{{ url_for('core.delete_client', client_id=cl.id) }}">Supprimer</a>
   </td>
 </tr>
 {% endfor %}
