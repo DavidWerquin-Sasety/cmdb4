@@ -4,9 +4,7 @@
 <a class="btn" href="{{ url_for('core.list_clients') }}">← Retour clients</a>
 <h2>Sites – {{ client.name }}</h2>
 <a class="btn" href="{{ url_for('core.create_site', client_id=client.id) }}">Nouveau site</a>
-
 <input type="text" id="searchInput" placeholder="Rechercher..." style="margin-top:10px;padding:4px;width:200px">
-
 <table id="sitesTable" style="margin-top:10px">
 <thead><tr>
   <th>Nom</th><th>Code</th><th>Type</th><th>Ville</th><th>Pays</th><th>Actions</th>
@@ -16,7 +14,7 @@
 <tr>
   <td>{{ s.name }}</td>
   <td>{{ s.code }}</td>
-  <td>{{ s.site_type.label if s.site_type else "-" }}</td>
+  <td>{{ s.site_type.label if s.site_type else "(non défini)" }}</td>
   <td>{{ s.city }}</td>
   <td>{{ s.country }}</td>
   <td>
@@ -28,15 +26,12 @@
 {% endfor %}
 </tbody>
 </table>
-
 <script>
-const searchInput = document.getElementById('searchInput');
-searchInput.addEventListener('keyup', function() {
-  const filter = this.value.toUpperCase();
-  const rows = document.querySelectorAll('#sitesTable tbody tr');
-  rows.forEach(row => {
-    const text = row.textContent.toUpperCase();
-    row.style.display = text.includes(filter) ? '' : 'none';
+const searchInput=document.getElementById('searchInput');
+searchInput.addEventListener('keyup',()=>{
+  const val=searchInput.value.toUpperCase();
+  document.querySelectorAll('#sitesTable tbody tr').forEach(row=>{
+    row.style.display=row.textContent.toUpperCase().includes(val)?'':'none';
   });
 });
 </script>
