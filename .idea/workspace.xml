@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="e26850c7-347d-4073-a94a-48f5ed55723a" name="Changes" comment="" />
+    <list default="true" id="e26850c7-347d-4073-a94a-48f5ed55723a" name="Changes" comment="Fusion de cmdb et auth&#10;ne fonctionne pas pour l'instant&#10;pas d'auth demandée">
+      <change afterPath="$PROJECT_DIR$/app/auth/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,21 +17,39 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;DavidWerquin-Sasety&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/DavidWerquin-Sasety/cmdb4.git&quot;,
+    &quot;accountId&quot;: &quot;eb85a0a7-0dd8-49be-a458-e1a1b7d76ece&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2zjP31Uppi7wvab3lqdU91VQuWz" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/david/Documents/Sasety/Dev/cmdb4&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -41,6 +66,172 @@
       <option name="presentableId" value="Default" />
       <updated>1752241305355</updated>
     </task>
+    <task id="LOCAL-00001" summary="v3">
+      <option name="closed" value="true" />
+      <created>1752245122163</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1752245122163</updated>
+    </task>
+    <task id="LOCAL-00002" summary="v4">
+      <option name="closed" value="true" />
+      <created>1752246858100</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1752246858100</updated>
+    </task>
+    <task id="LOCAL-00003" summary="v6">
+      <option name="closed" value="true" />
+      <created>1752248828846</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1752248828846</updated>
+    </task>
+    <task id="LOCAL-00004" summary="v7">
+      <option name="closed" value="true" />
+      <created>1752249347386</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1752249347386</updated>
+    </task>
+    <task id="LOCAL-00005" summary="v8">
+      <option name="closed" value="true" />
+      <created>1752249988951</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1752249988951</updated>
+    </task>
+    <task id="LOCAL-00006" summary="v9">
+      <option name="closed" value="true" />
+      <created>1752250552359</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1752250552359</updated>
+    </task>
+    <task id="LOCAL-00007" summary="v12">
+      <option name="closed" value="true" />
+      <created>1752251741437</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1752251741437</updated>
+    </task>
+    <task id="LOCAL-00008" summary="v13">
+      <option name="closed" value="true" />
+      <created>1752252309090</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1752252309090</updated>
+    </task>
+    <task id="LOCAL-00009" summary="v16">
+      <option name="closed" value="true" />
+      <created>1752253110765</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1752253110765</updated>
+    </task>
+    <task id="LOCAL-00010" summary="v17">
+      <option name="closed" value="true" />
+      <created>1752253616099</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1752253616099</updated>
+    </task>
+    <task id="LOCAL-00011" summary="v18">
+      <option name="closed" value="true" />
+      <created>1752254039585</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1752254039585</updated>
+    </task>
+    <task id="LOCAL-00012" summary="v19">
+      <option name="closed" value="true" />
+      <created>1752254196017</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1752254196017</updated>
+    </task>
+    <task id="LOCAL-00013" summary="v20">
+      <option name="closed" value="true" />
+      <created>1752254404732</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1752254404732</updated>
+    </task>
+    <task id="LOCAL-00014" summary="v21">
+      <option name="closed" value="true" />
+      <created>1752254681828</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1752254681828</updated>
+    </task>
+    <task id="LOCAL-00015" summary="v22 OK">
+      <option name="closed" value="true" />
+      <created>1752254991660</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1752254991660</updated>
+    </task>
+    <task id="LOCAL-00016" summary="v23">
+      <option name="closed" value="true" />
+      <created>1752255145413</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1752255145413</updated>
+    </task>
+    <task id="LOCAL-00017" summary="v24&#10;OK&#10;todo :&#10;Authentification&#10;Formulaire client">
+      <option name="closed" value="true" />
+      <created>1752255477694</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1752255477694</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Fusion de cmdb et auth&#10;ne fonctionne pas pour l'instant&#10;pas d'auth demandée">
+      <option name="closed" value="true" />
+      <created>1752845916292</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1752845916292</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="v3" />
+    <MESSAGE value="v4" />
+    <MESSAGE value="v6" />
+    <MESSAGE value="v7" />
+    <MESSAGE value="v8" />
+    <MESSAGE value="v9" />
+    <MESSAGE value="v12" />
+    <MESSAGE value="v13" />
+    <MESSAGE value="v16" />
+    <MESSAGE value="v17" />
+    <MESSAGE value="v18" />
+    <MESSAGE value="v19" />
+    <MESSAGE value="v20" />
+    <MESSAGE value="v21" />
+    <MESSAGE value="v22 OK" />
+    <MESSAGE value="v23" />
+    <MESSAGE value="v24&#10;OK&#10;todo :&#10;Authentification&#10;Formulaire client" />
+    <MESSAGE value="Fusion de cmdb et auth&#10;ne fonctionne pas pour l'instant&#10;pas d'auth demandée" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fusion de cmdb et auth&#10;ne fonctionne pas pour l'instant&#10;pas d'auth demandée" />
   </component>
 </project>
